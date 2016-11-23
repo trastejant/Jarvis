@@ -28,9 +28,11 @@ SOURCES += \
     common/qimageselectionwidget.cpp \
     common/sjarvisnode.cpp \
     common/sjarvisnodecomponent.cpp \
-    common/sjarvistcpclient.cpp \
     testAppAndroid/main.cpp \
-    jarvisnodetestapp.cpp
+    common/jarvisnodetestapp.cpp \
+    common/gnodeconfigdialog.cpp \
+    common/qwificonfigdialog.cpp \
+    common/grtttlplayer.cpp
 
 
 HEADERS += \
@@ -45,8 +47,11 @@ HEADERS += \
     common/qimageselectionwidget.h \
     common/sjarvisnode.h \
     common/sjarvisnodecomponent.h \
-    common/sjarvistcpclient.h \
-    jarvisnodetestapp.h
+    common/jarvisnodetestapp.h \
+    common/gnodeconfigdialog.h \
+    common/qwificonfigdialog.h \
+    common/grtttlplayer.h \
+    ../JarvisFirmware/settings.h
 
 
 FORMS   += \
@@ -56,7 +61,10 @@ FORMS   += \
     common/gsimplegraph.ui \
     common/gwidgetnode.ui \
     common/qimageselectionwidget.ui \
-    jarvisnodetestapp.ui
+    common/jarvisnodetestapp.ui \
+    common/gnodeconfigdialog.ui \
+    common/qwificonfigdialog.ui \
+    common/grtttlplayer.ui
 
 DISTFILES += \
     testAppAndroid/android/AndroidManifest.xml \

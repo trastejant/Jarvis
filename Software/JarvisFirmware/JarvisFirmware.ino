@@ -8,6 +8,9 @@
 #ifdef ESP8266
   #include <ESP8266WiFi.h>
   #include <ESP8266WebServer.h>
+  #include <ESP8266mDNS.h>
+  #include <ESP8266HTTPUpdateServer.h>
+  #include <FS.h>
 #endif
 
 
@@ -27,18 +30,18 @@ extern "C" {
 #endif
 
 //Magia negra con ifdefs
-//#define I2C_TRANSPORT (no implementado)
-//#define DEBUG_STRINGS
-//#define BIG_FLASH
-#define EXTRA_CARRIAGE_RETURN //añade un retorno de carro a los paquetes de protocolo para leerlos mejor
+
+//#define DEBUG_PROTOCOL
+//#define EXTRA_CARRIAGE_RETURN //añade un retorno de carro a los paquetes de protocolo para leerlos mejor
 
 #ifdef ESP8266
-    #define DEBUG_STRINGS
+    #define DEBUG_STRINGS //Se esta usando?
     #define VERBOSE_DEBUG
     #define BIG_FLASH
 #endif
 
-uint8_t updateInterval = 25;
+uint16_t updateInterval = 25;
+
 
 #include "helpers.h"
 #include "jarvisNode.h"
@@ -46,52 +49,63 @@ uint8_t updateInterval = 25;
 #include "MakeSwitch.h"
 #include "coffeeMaker.h"
 #include "ledPanelNode.h"
+#include "lednotificationpanel.h"
 #include "testNode.h"
 #include "termometroNode.h"
+#include "doorcontrolnode.h"
+
 
 jarvisNode* node;
-
+EEPROMStorage EEPROMSettings;
 
 void setup() 
 {
     Serial.begin(115200);
-    jarvisModules type = EEPROMStorage::getSettings().moduleType;
-    if      (type == unknownModule)
+    //EEPROMSettings.clearEEPROM();
+    EEPROMSettings.reload();
+    node = 0;
+    jarvisModules type = EEPROMSettings.settings().moduleType;
+
+    if      (type == unConfiguredModule)
     {
-        node = new jarvisNode();
+        node = new jarvisNode(&EEPROMSettings);
     }
-    #ifdef ESP8266
-    else if(type == espRepeaterModule)
-    {
-        node = new jarvisNode(jarvisNode::espRepeater);
-    }
-    #endif
     else if(type == simpleSwitchModule)
     {
-        node = new simpleSwitch();
+        node = new simpleSwitch(&EEPROMSettings);
     }else if(type == makeSwitchModule)
     {
-        node = new makeSwitch();
+        node = new makeSwitch(&EEPROMSettings);
     }else if(type == airQualityModule)
     {
 
     }else if(type == simplePowerControlModule)
     {
-        node = new simplePowerControl(14);
+        node = new simplePowerControl(&EEPROMSettings);
     }else if(type == advancedPowerControlModule)
     {
 
     }else if(type == coffeeMakerModule)
     {
-        node = new coffeeMaker(14,15,A0);
+        node = new coffeeMaker(&EEPROMSettings);
     }else if(type == ledPanelModule)
     {
-        node = new ledPanelNode();
+        node = new ledPanelNode(&EEPROMSettings);
+    }else if(type == ledNotificationPanelModule)
+    {
+        node = new ledNotificationPanelNode(&EEPROMSettings);
     }else if(type == testNodeModule){
-        node = new testNode();
+        node = new testNode(&EEPROMSettings);
     }else if(type == termometroNodeModule){
-        node = new termometroNode();
+        node = new termometroNode(&EEPROMSettings);
+    }else if(type == doorControlModule){
+        node = new doorControlNode(&EEPROMSettings);
     }
+
+    if(node == 0)
+        node = new jarvisNode(&EEPROMSettings);
+
+
     node->setup();
 }
 

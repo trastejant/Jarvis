@@ -68,4 +68,44 @@ protected:
 
 };
 
+
+class potenciometer : public nodeComponent
+{
+public:
+    potenciometer(int pin = -1) : nodeComponent(pin)
+    {
+        m_capableEvents.push_back(E_RAW_READ);
+        m_capableEvents.push_back(E_DATA_READ);
+        m_actions.push_back(A_READ_RAW);
+        m_actions.push_back(A_READ_DATA);
+        m_id = "Potenciometer";
+    }
+
+    bool canRead()
+    {
+        return true;
+    }
+
+    uint16_t readRaw()
+    {
+        if(!m_enabled){return 0;}
+        return analogRead(m_pin);
+    }
+
+    float readData()
+    {
+        uint8_t samples = 5;
+        float value = readRaw();
+        for(int i = 1 ; i < samples ; samples++)
+        {
+            value += readRaw();
+            value /= 2;
+        }
+        return value/10.f;
+    }
+
+protected:
+
+};
+
 #endif // BUTTONS_H

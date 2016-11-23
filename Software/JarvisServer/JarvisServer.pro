@@ -12,7 +12,8 @@ TARGET = JarvisServer
 TEMPLATE = app
 
 INCLUDEPATH+= ../JarvisFirmware/ \
-                common/
+                common/ \
+                jarvisServer/
 
 
 SOURCES += \
@@ -25,12 +26,22 @@ SOURCES += \
     common/qimageselectionwidget.cpp \
     common/sjarvisnode.cpp \
     common/sjarvisnodecomponent.cpp \
-    common/sjarvistcpclient.cpp \
     jarvisServer/gjarvisgui.cpp \
     jarvisServer/main.cpp \
     jarvisServer/sjarvis.cpp \
     jarvisServer/sjarvisnodeserver.cpp \
-    jarvisServer/sjarvistcpserver.cpp
+    jarvisServer/gjarvisserverwidget.cpp \
+    jarvisServer/gnodesimplewidget.cpp \
+    jarvisServer/qconnectdialog.cpp \
+    common/jarvisnodetestapp.cpp \
+    jarvisServer/sjarvisconnection.cpp \
+    jarvisServer/sjarvisconnectionmanager.cpp \
+    jarvisServer/gjarvisconnectionmanagerwidget.cpp \
+    jarvisServer/gjarvisconnectionwidget.cpp \
+    common/grtttlplayer.cpp \
+    common/qwificonfigdialog.cpp \
+    common/gnodeconfigdialog.cpp \
+    jarvisServer/gruleeditorwidget.cpp
 
 HEADERS += \
     ../JarvisFirmware/jarvisProtocol.h \
@@ -44,11 +55,22 @@ HEADERS += \
     common/qimageselectionwidget.h \
     common/sjarvisnode.h \
     common/sjarvisnodecomponent.h \
-    common/sjarvistcpclient.h \
     jarvisServer/gjarvisgui.h \
     jarvisServer/sjarvis.h \
     jarvisServer/sjarvisnodeserver.h \
-    jarvisServer/sjarvistcpserver.h
+    jarvisServer/gjarvisserverwidget.h \
+    jarvisServer/gnodesimplewidget.h \
+    jarvisServer/qconnectdialog.h \
+    common/jarvisnodetestapp.h \
+    jarvisServer/sjarvisconnection.h \
+    jarvisServer/sjarvisconnectionmanager.h \
+    jarvisServer/gjarvisconnectionmanagerwidget.h \
+    jarvisServer/gjarvisconnectionwidget.h \
+    common/grtttlplayer.h \
+    common/qwificonfigdialog.h \
+    ../JarvisFirmware/settings.h \
+    common/gnodeconfigdialog.h \
+    jarvisServer/gruleeditorwidget.h
 
 FORMS   += \
     common/gblinkwidget.ui \
@@ -57,4 +79,17 @@ FORMS   += \
     common/gsimplegraph.ui \
     common/gwidgetnode.ui \
     common/qimageselectionwidget.ui \
-    jarvisServer/gjarvisgui.ui
+    jarvisServer/gjarvisgui.ui \
+    jarvisServer/gjarvisserverwidget.ui \
+    jarvisServer/gnodesimplewidget.ui \
+    jarvisServer/qconnectdialog.ui \
+    common/jarvisnodetestapp.ui \
+    jarvisServer/gjarvisconnectionmanagerwidget.ui \
+    jarvisServer/gjarvisconnectionwidget.ui \
+    common/grtttlplayer.ui \
+    common/qwificonfigdialog.ui \
+    common/gnodeconfigdialog.ui \
+    jarvisServer/gruleeditorwidget.ui
+
+RESOURCES += \
+    common/resources.qrc

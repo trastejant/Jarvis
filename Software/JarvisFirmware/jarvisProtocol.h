@@ -18,20 +18,24 @@
 
 #define C_GET_PROTOCOL_VERSION  F("gpv")
 #define C_PROTOCOL_VERSION      F("pv")
+#define C_SAVE_EEPROM           F("save")
+#define C_CLEAR_EEPROM          F("clear")
+#define C_RELOAD_EEPROM         F("reload")
+#define C_RESET                 F("rst")
 
-#define M_ESPMSG          F("E")
+#define C_SET_UPDATE_INTERVAL   F("sui")
+#define C_SETAP                 F("sap")
+#define C_SETCLIENT             F("scl")
+#define C_SET_CONFIG            F("sconfig")
+#define C_GET_CONFIG            F("gconfig")
+#define C_CONFIG                F("config")
 
 #define C_GET_FREEM     F("gfm")
 #define C_FREEMEM       F("fm")
 
-#define C_SETAP         F("sap")
-#define C_SETCLIENT     F("scl")
 #define C_WSTATUS       F("ws")
-#define C_LOCALIP       F("lip")
-#define C_BRIDGEMODE    F("bm")
-#define C_RESET         F("rst")
-#define C_ENABLE        F("en")
-#define C_DISABLE       F("dis")
+#define C_LOCALIP       F("ip")
+
 #define C_PING          F("ping")
 #define C_PONG          F("pong")
 
@@ -42,16 +46,12 @@
 #define C_COMPONENT     F("comps")
 
 #define C_POLLSENSOR    F("psen")//pregunta
-#define C_SENSOR        F("sen")//respuesta
-
 #define C_POLLSENSORS   F("psens")//pregunta
 #define C_SENSORS       F("sens")//respuesta
-
 #define C_STOP_POLLING  F("spsens")
 
 #define C_DOACTION      F("da")
 
-#define C_SET_UPDATE_INTERVAL F("sui")
 
 #define E_EVENT       F("ev")
 #define E_ACTION      F("act")
@@ -65,8 +65,6 @@ enum jarvisEvents
     E_DEACTIVATED,
     E_RAW_READ,
     E_DATA_READ,
-    E_GLOBAL_POWERON,
-    E_GLOBAL_SHUTDOWN,
     E_COFFEE_MAKING,
     E_COFFEE_MADE
 };
@@ -87,8 +85,10 @@ enum jarvisActions
     A_SET_COLOR,
     A_CYLON,
     A_SET_LEDS,
-    A_SET_LED,
+    A_DISPLAY,
     A_BEEP,
+    A_PLAYTONE,
+    A_PLAYRTTTL,
     A_MAKE_COFFEE
 };
 
